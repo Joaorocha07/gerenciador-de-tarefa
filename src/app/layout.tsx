@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
 import '../styles/globals.css'
+import Provider from './Provider'
 import CustomHead from '@/components/head/CustomHead'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -21,7 +22,11 @@ export default function RootLayout ({
   return (
     <html lang="pt-br">
       <CustomHead title="Bem vindo!" />
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <Provider>
+          {children}
+        </Provider>
+      </body>
     </html>
   )
 }
