@@ -1,38 +1,30 @@
 import React, { useState } from 'react'
 
-import { AccountCircle } from '@mui/icons-material'
 import { useDrawerContext } from '@/contexts/Drawer/DrawerContext'
 
 import {
   AppBar,
+  Avatar,
   Box,
   IconButton,
   Menu,
   Toolbar,
   Typography,
-  styled,
-  useMediaQuery
+  useMediaQuery,
+  useTheme
 } from '@mui/material'
 
-import theme from '@/theme'
 import MenuItem from '@mui/material/MenuItem'
+import SettingsIcon from '@mui/icons-material/Settings'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
-
-const CustomIcon = styled('div')({
-  backgroundColor: 'white',
-  borderRadius: '50%',
-  padding: '2px',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  '& .MuiSvgIcon-root': {
-    color: 'black'
-  }
-})
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
+import ButtonToggleTheme from '@/components/button-toggle-theme/ButtonToggleTheme'
 
 export default function AppBarDrawer (): JSX.Element {
+  const theme = useTheme()
   const { toggleDrawerOpen } = useDrawerContext()
+
   const mobile = useMediaQuery(theme.breakpoints.down('sm'))
 
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
@@ -53,7 +45,7 @@ export default function AppBarDrawer (): JSX.Element {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" sx={{ backgroundColor: theme.palette.background.paper }}>
         <Toolbar>
           {mobile && (
             <IconButton
@@ -64,22 +56,28 @@ export default function AppBarDrawer (): JSX.Element {
               sx={{ mr: 2 }}
               onClick={toggleMenu}
             >
-              {isMenuOpen ? <CustomIcon> <ChevronLeftIcon /> </CustomIcon> : <CustomIcon> <ChevronRightIcon /> </CustomIcon>}
+              {isMenuOpen ? <ChevronLeftIcon /> : <ChevronRightIcon />}
             </IconButton>
           )}
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-
-          </Typography>
-          <div>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleMenu}
-              color="inherit"
-            >
-              <AccountCircle />
+          <Box sx={{ flexGrow: 1 }}>
+            <ButtonToggleTheme />
+          </Box>
+          <Box display="flex" alignItems="center" gap={theme.spacing(2)} >
+            <IconButton sx={{ color: theme.palette.primary.contrastText }}>
+              <SettingsIcon />
+            </IconButton>
+            <Avatar
+              sx={{
+                height: theme.spacing(5),
+                width: theme.spacing(5)
+              }}
+              src='/static/images/avatar/1.jpg'
+            />
+            <Typography variant="body1" component="div" sx={{ textAlign: 'center' }}>
+              Nome do usuario
+            </Typography>
+            <IconButton onClick={handleMenu} sx={{ color: theme.palette.primary.contrastText }}>
+              <KeyboardArrowDownIcon />
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -99,7 +97,7 @@ export default function AppBarDrawer (): JSX.Element {
               <MenuItem onClick={handleClose}>Profile</MenuItem>
               <MenuItem onClick={handleClose}>My account</MenuItem>
             </Menu>
-          </div>
+          </Box>
         </Toolbar>
       </AppBar>
     </Box>
