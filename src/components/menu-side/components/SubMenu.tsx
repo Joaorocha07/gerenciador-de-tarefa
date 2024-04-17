@@ -23,17 +23,14 @@ interface SubMenuProps {
 export default function SubMenu ({ text, children, selected, onClick }: SubMenuProps): JSX.Element {
   const theme = useTheme()
   const [open, setOpen] = useState(false)
-  const [clicked, setClicked] = useState(false)
 
   const handleClick = (): void => {
     setOpen(!open)
     onClick()
-    setClicked(true)
-    console.log(selected)
   }
   return (
     <>
-      <ListItemButton onClick={handleClick} sx={{ bgcolor: clicked && selected ? theme.palette.primary.main : 'transparent' }}>
+      <ListItemButton onClick={handleClick} sx={{ bgcolor: selected ? theme.palette.primary.main : 'transparent' }}>
         <ListItemText primary={text} sx={{ color: theme.palette.primary.contrastText }} />
         <ListItemIcon sx={{ color: theme.palette.primary.contrastText }}>
           {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}

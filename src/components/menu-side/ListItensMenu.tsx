@@ -3,15 +3,22 @@ import React, { useState } from 'react'
 import { menuItems } from './menu-items'
 import { Box, List } from '@mui/material'
 import { Home } from '@mui/icons-material'
+import { useDrawerContext } from '@/contexts/Drawer/DrawerContext'
 
 import SubMenu from './components/SubMenu'
 import ListMenuSide from './components/ListMenuSide'
 
 export const ListItensMenu = (): JSX.Element => {
+  const { toggleDrawerOpen } = useDrawerContext()
   const [selectedItem, setSelectedItem] = useState<string>('')
 
   const handleItemClick = (item: string): void => {
     setSelectedItem(item)
+  }
+
+  const handleSubItemClick = (subItem: string): void => {
+    setSelectedItem(subItem)
+    toggleDrawerOpen()
   }
 
   return (
@@ -23,6 +30,7 @@ export const ListItensMenu = (): JSX.Element => {
           selected={selectedItem === 'dashboard'}
           onClick={() => {
             setSelectedItem('dashboard')
+            toggleDrawerOpen()
           }}
         >
           <Home />
@@ -42,7 +50,7 @@ export const ListItensMenu = (): JSX.Element => {
                     text={subItem.text}
                     href={subItem.href}
                     selected={selectedItem === subItem.text.toLowerCase().replace(/\s/g, '')}
-                    onClick={() => { handleItemClick(subItem.text.toLowerCase().replace(/\s/g, '')) }}
+                    onClick={() => { handleSubItemClick(subItem.text.toLowerCase().replace(/\s/g, '')) }}
                   >
                     {subItem.icon}
                   </ListMenuSide>

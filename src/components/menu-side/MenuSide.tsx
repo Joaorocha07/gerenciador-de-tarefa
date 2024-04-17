@@ -4,7 +4,17 @@ import React from 'react'
 import { ListItensMenu } from './ListItensMenu'
 import { type IChildrenProp } from '@/types/global'
 import { useDrawerContext } from '@/contexts/Drawer/DrawerContext'
-import { Avatar, Box, Divider, Drawer, useMediaQuery, useTheme } from '@mui/material'
+
+import {
+  Avatar,
+  Box,
+  Divider,
+  Drawer,
+  useMediaQuery,
+  useTheme
+} from '@mui/material'
+
+import AppBarDrawer from './app-bar/AppBarDrawer'
 
 export default function MenuSide ({ children }: IChildrenProp): JSX.Element {
   const theme = useTheme()
@@ -31,7 +41,10 @@ export default function MenuSide ({ children }: IChildrenProp): JSX.Element {
         </Box>
       </Drawer>
       <Box height='100vh' ml={mobile ? 0 : theme.spacing(28)}>
-        {children}
+        <AppBarDrawer />
+        <Box mt={mobile ? theme.spacing(2) : theme.spacing(5)} ml={mobile ? theme.spacing(2) : theme.spacing(5)}>
+          {children}
+        </Box>
       </Box>
     </>
   )
