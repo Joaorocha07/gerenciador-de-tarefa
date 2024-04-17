@@ -1,13 +1,13 @@
 'use client'
 import { createTheme } from '@mui/material'
-import { cyan, yellow } from '@mui/material/colors'
+import { blue, cyan, yellow } from '@mui/material/colors'
 
 export const DarkTheme = createTheme({
   palette: {
     primary: {
-      main: yellow[700],
-      dark: yellow[800],
-      light: yellow[500],
+      main: blue[400],
+      dark: blue[800],
+      light: blue[500],
       contrastText: '#ffffff'
     },
     secondary: {

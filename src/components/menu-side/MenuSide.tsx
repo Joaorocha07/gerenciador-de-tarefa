@@ -1,12 +1,10 @@
 'use client'
 import React from 'react'
 
-import { Home } from '@mui/icons-material'
+import { ListItensMenu } from './ListItensMenu'
 import { type IChildrenProp } from '@/types/global'
 import { useDrawerContext } from '@/contexts/Drawer/DrawerContext'
 import { Avatar, Box, Divider, Drawer, useMediaQuery, useTheme } from '@mui/material'
-
-import ListMenuSide from './ListMenuSide'
 
 export default function MenuSide ({ children }: IChildrenProp): JSX.Element {
   const theme = useTheme()
@@ -29,11 +27,7 @@ export default function MenuSide ({ children }: IChildrenProp): JSX.Element {
 
           <Divider />
 
-          <Box flex={1}>
-            <ListMenuSide text="Dashboard">
-              <Home />
-            </ListMenuSide>
-          </Box>
+          <ListItensMenu />
         </Box>
       </Drawer>
       <Box height='100vh' ml={mobile ? 0 : theme.spacing(28)}>
