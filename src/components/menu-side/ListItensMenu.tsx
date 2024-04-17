@@ -1,25 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-import { menuItems } from './menu-items'
+import { items } from './helper/menu'
+import { useMenu } from '@/hook/useMenu'
 import { Box, List } from '@mui/material'
 import { Home } from '@mui/icons-material'
-import { useDrawerContext } from '@/contexts/Drawer/DrawerContext'
 
 import SubMenu from './components/SubMenu'
 import ListMenuSide from './components/ListMenuSide'
 
 export const ListItensMenu = (): JSX.Element => {
-  const { toggleDrawerOpen } = useDrawerContext()
-  const [selectedItem, setSelectedItem] = useState<string>('')
-
-  const handleItemClick = (item: string): void => {
-    setSelectedItem(item)
-  }
-
-  const handleSubItemClick = (subItem: string): void => {
-    setSelectedItem(subItem)
-    toggleDrawerOpen()
-  }
+  const { selectedItem, handleItemClick, menuItems, handleSubItemClick } = useMenu(items)
 
   return (
     <Box flex={1}>
@@ -28,10 +18,7 @@ export const ListItensMenu = (): JSX.Element => {
           text='Dashboard'
           href='/dashboard'
           selected={selectedItem === 'dashboard'}
-          onClick={() => {
-            setSelectedItem('dashboard')
-            toggleDrawerOpen()
-          }}
+          onClick={() => { handleItemClick('dashboard') }}
         >
           <Home />
         </ListMenuSide>
