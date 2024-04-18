@@ -20,7 +20,7 @@ export default function ButtonToggleTheme (): JSX.Element {
       <IconButton
         onClick={toggleThemeMode}
         sx={{
-          border: '2px solid #66b2ff',
+          border: `2px solid ${theme.palette.primary.main}`,
           borderRadius: '25%',
           p: '4px'
         }}>

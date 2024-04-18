@@ -9,7 +9,6 @@ import {
   IconButton,
   Menu,
   Toolbar,
-  Typography,
   useMediaQuery,
   useTheme
 } from '@mui/material'
@@ -18,6 +17,7 @@ import MenuItem from '@mui/material/MenuItem'
 import SettingsIcon from '@mui/icons-material/Settings'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
+import CustomTypography from '@/components/text/CustomTypography'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import ButtonToggleTheme from '@/components/button-toggle-theme/ButtonToggleTheme'
 
@@ -73,9 +73,7 @@ export default function AppBarDrawer (): JSX.Element {
               }}
               src='/static/images/avatar/1.jpg'
             />
-            <Typography variant="body1" component="div" sx={{ textAlign: 'center' }}>
-              Nome do usuario
-            </Typography>
+            <CustomTypography text='Nome do usuario' variant='body2' />
             <IconButton onClick={handleMenu} sx={{ color: theme.palette.primary.contrastText }}>
               <KeyboardArrowDownIcon />
             </IconButton>

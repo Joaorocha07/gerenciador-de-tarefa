@@ -5,7 +5,7 @@ import { blue, cyan, yellow } from '@mui/material/colors'
 export const DarkTheme = createTheme({
   palette: {
     primary: {
-      main: blue[400],
+      main: '#02A0FC',
       dark: blue[800],
       light: blue[500],
       contrastText: '#ffffff'
@@ -17,8 +17,8 @@ export const DarkTheme = createTheme({
       contrastText: '#ffffff'
     },
     background: {
-      paper: '#303134',
-      default: '#202124'
+      paper: '#272727',
+      default: '#181818'
     }
   }
 })
