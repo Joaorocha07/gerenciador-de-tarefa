@@ -4,8 +4,8 @@ import React, { useState } from 'react'
 import { Box, Button, styled, useTheme } from '@mui/material'
 
 import CustomTypography from '@/components/text/CustomTypography'
-import ButtonToggleTheme from '@/components/button-toggle-theme/ButtonToggleTheme'
-import CustomTextField from '@/components/custom-text-field/CustomTextField'
+import ButtonToggleTheme from '@/components/button-toggle-theme'
+import CustomTextField from '@/components/custom-text-field'
 
 interface SwitchButtonProps {
   selected: boolean

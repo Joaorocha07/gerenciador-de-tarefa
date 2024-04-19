@@ -4,8 +4,8 @@ import React from 'react'
 import { type IChildrenProp } from '@/types/global'
 import { DrawerProvider } from '@/contexts/Drawer/DrawerContext'
 
-import CustomHead from '@/components/head/CustomHead'
-import MenuSide from '@/components/menu-side/MenuSide'
+import CustomHead from '@/components/custom-head'
+import MenuSide from '@/components/menu-side/menu-side'
 
 export default function LoginLayout ({ children }: IChildrenProp): JSX.Element {
   return (

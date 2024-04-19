@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 
-import { ListItensMenu } from './ListItensMenu'
+import { ListItensMenu } from './list-itens-menu'
 import { type IChildrenProp } from '@/types/global'
 import { useDrawerContext } from '@/contexts/Drawer/DrawerContext'
 
@@ -14,7 +14,7 @@ import {
   useTheme
 } from '@mui/material'
 
-import AppBarDrawer from './app-bar/AppBarDrawer'
+import AppBarDrawer from './app-bar/app-bar-drawer'
 
 export default function MenuSide ({ children }: IChildrenProp): JSX.Element {
   const theme = useTheme()

@@ -5,9 +5,9 @@ import { useMenu } from '@/hook/useMenu'
 import { Home } from '@mui/icons-material'
 import { Box, List, useTheme } from '@mui/material'
 
-import SubMenu from './components/SubMenu'
+import SubMenu from './components/sub-menu'
 import LogoutIcon from '@mui/icons-material/Logout'
-import ListMenuSide from './components/ListMenuSide'
+import ListMenuSide from './components/list-menu-side'
 
 export const ListItensMenu = (): JSX.Element => {
   const theme = useTheme()

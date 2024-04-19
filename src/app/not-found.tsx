@@ -3,7 +3,7 @@ import React from 'react'
 
 import { Box } from '@mui/material'
 
-import CustomHead from '@/components/head/CustomHead'
+import CustomHead from '@/components/custom-head'
 
 export default function NotFound (): JSX.Element {
   return (
