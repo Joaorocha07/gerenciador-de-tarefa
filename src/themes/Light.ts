@@ -1,24 +1,65 @@
 'use client'
 import { createTheme } from '@mui/material'
-import { blue, cyan, yellow } from '@mui/material/colors'
+import { yellow } from '@mui/material/colors'
+
+declare module '@mui/material/styles' {
+  interface Palette {
+    textfield: {
+      border: string
+      hoverBorder: string
+      focusBorder: string
+      placeholder: string
+      inputText: string
+    }
+    button: {
+      background: string
+      hoverBackground: string
+    }
+  }
+
+  interface PaletteOptions {
+    textfield: {
+      border: string
+      hoverBorder: string
+      focusBorder: string
+      placeholder: string
+      inputText: string
+    }
+    button: {
+      background: string
+      hoverBackground: string
+    }
+  }
+}
 
 export const LightTheme = createTheme({
   palette: {
     primary: {
       main: '#02A0FC',
-      dark: blue[800],
-      light: blue[500],
-      contrastText: '#272727'
+      dark: '#DEE1E4',
+      light: '#ECEFF1',
+      contrastText: '#181818'
     },
     secondary: {
-      main: cyan[500],
+      main: '#FDFDFD',
       dark: yellow[400],
       light: yellow[300],
       contrastText: '#ffffff'
     },
     background: {
       paper: '#ffffff',
-      default: '#f7f6f3'
+      default: '#FDFDFD'
+    },
+    textfield: {
+      border: '#D5D8DB',
+      hoverBorder: '#606060',
+      focusBorder: '#0F9CEE',
+      placeholder: '#333333',
+      inputText: '#4C4C4C'
+    },
+    button: {
+      background: '#0D6FDE',
+      hoverBackground: '#084387'
     }
   }
 })
