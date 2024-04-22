@@ -19,7 +19,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import CustomTypography from '@/components/text/CustomTypography'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
-import ButtonToggleTheme from '@/components/button-toggle-theme'
+import ButtonToggleTheme from '@/components/button/button-toggle-theme'
 
 export default function AppBarDrawer (): JSX.Element {
   const theme = useTheme()

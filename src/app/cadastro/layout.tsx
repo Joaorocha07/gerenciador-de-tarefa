@@ -3,32 +3,33 @@ import React, { useState } from 'react'
 
 import { useRouter } from 'next/navigation'
 import { Box, useTheme } from '@mui/material'
+import { type IChildrenProp } from '@/types/global'
 
+import CustomHead from '@/components/custom-head'
 import SwitchButton from '@/components/button/switchButton'
-import CustonButton from '@/components/button/custom-button'
-import CustomTextField from '@/components/textfield/custom-text-field'
 import ButtonToggleTheme from '@/components/button/button-toggle-theme'
 import CustomTypography from '@/components/text/CustomTypography'
 
-export default function Login (): JSX.Element {
+export default function CadastroLayout ({ children }: IChildrenProp): JSX.Element {
   const theme = useTheme()
   const router = useRouter()
-  const [selectedButton, setSelectedButton] = useState<'login' | 'novaConta'>('login')
+
+  const [selectedButton, setSelectedButton] = useState<'login' | 'novaConta'>('novaConta')
 
   const handleButtonClick = (buttonName: 'login' | 'novaConta'): void => {
-    router.push('/cadastro')
+    router.push('/login')
     setSelectedButton(buttonName)
   }
-
   return (
     <>
+      <CustomHead title="Cadastro" />
       <Box
         sx={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          height: '72vh'
+          height: '100vh'
         }}
       >
         <Box display="flex" alignItems="center" gap={theme.spacing(2)} mb={theme.spacing(5)}>
@@ -64,13 +65,7 @@ export default function Login (): JSX.Element {
                 Nova conta
             </SwitchButton>
           </Box>
-          <Box textAlign="center">
-            <CustomTypography text="Acesse sua conta" variant="body1" />
-          </Box>
-          <Box>
-            <CustomTextField fullWidth label='Seu e-mail' variant='outlined' />
-          </Box>
-          <CustonButton fullWidth onClick={() => {}}>Próximo</CustonButton>
+          {children}
         </Box>
       </Box>
     </>

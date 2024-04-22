@@ -11,6 +11,9 @@ export declare module '@mui/material/styles' {
       background: string
       hoverBackground: string
     }
+    buttonTogglTheme: {
+      background: string
+    }
   }
 
   interface PaletteOptions {
@@ -24,6 +27,9 @@ export declare module '@mui/material/styles' {
     button: {
       background: string
       hoverBackground: string
+    }
+    buttonTogglTheme: {
+      background: string
     }
   }
 }

@@ -30,6 +30,9 @@ export const DarkTheme = createTheme({
     button: {
       background: '#58A5FF',
       hoverBackground: '#084387'
+    },
+    buttonTogglTheme: {
+      background: '#ffffff'
     }
   }
 })

@@ -3,9 +3,9 @@ import React from 'react'
 import { TextField, useTheme } from '@mui/material'
 
 interface CustomTextFieldProps {
-  label: string
   variant: 'standard' | 'outlined' | 'filled'
   fullWidth?: boolean
+  label: string
 }
 
 export default function CustomTextField ({ label, variant, fullWidth }: CustomTextFieldProps): JSX.Element {

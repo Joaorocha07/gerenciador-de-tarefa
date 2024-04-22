@@ -30,6 +30,9 @@ export const LightTheme = createTheme({
     button: {
       background: '#0D6FDE',
       hoverBackground: '#084387'
+    },
+    buttonTogglTheme: {
+      background: '#181818'
     }
   }
 })
