@@ -33,6 +33,10 @@ export const DarkTheme = createTheme({
     },
     buttonTogglTheme: {
       background: '#ffffff'
+    },
+    iconLogin: {
+      colorSuccess: '#62C972',
+      colorError: '#FF5757'
     }
   }
 })

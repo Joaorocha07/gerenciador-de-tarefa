@@ -14,6 +14,10 @@ export declare module '@mui/material/styles' {
     buttonTogglTheme: {
       background: string
     }
+    iconLogin: {
+      colorSuccess: string
+      colorError: string
+    }
   }
 
   interface PaletteOptions {
@@ -30,6 +34,10 @@ export declare module '@mui/material/styles' {
     }
     buttonTogglTheme: {
       background: string
+    }
+    iconLogin: {
+      colorSuccess: string
+      colorError: string
     }
   }
 }

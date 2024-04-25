@@ -33,6 +33,10 @@ export const LightTheme = createTheme({
     },
     buttonTogglTheme: {
       background: '#181818'
+    },
+    iconLogin: {
+      colorSuccess: '#62C972',
+      colorError: '#EA362C'
     }
   }
 })
