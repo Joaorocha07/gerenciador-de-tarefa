@@ -13,6 +13,8 @@ import CustomTypography from '@/components/text/CustomTypography'
 export default function Login (): JSX.Element {
   const theme = useTheme()
   const router = useRouter()
+
+  const [email, setEmail] = useState('')
   const [selectedButton, setSelectedButton] = useState<'login' | 'novaConta'>('login')
 
   const handleButtonClick = (buttonName: 'login' | 'novaConta'): void => {
@@ -68,7 +70,17 @@ export default function Login (): JSX.Element {
             <CustomTypography text="Acesse sua conta" variant="body1" />
           </Box>
           <Box>
-            <CustomTextField fullWidth label='Seu e-mail' variant='outlined' />
+            <CustomTextField
+              fullWidth
+              label="Seu e-mail"
+              variant="outlined"
+              type="email"
+              onChange={(e) => {
+                setEmail(e.target.value)
+              }}
+              value={email}
+              name="email"
+            />
           </Box>
           <CustonButton fullWidth onClick={() => {}}>Próximo</CustonButton>
         </Box>
