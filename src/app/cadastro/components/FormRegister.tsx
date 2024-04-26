@@ -14,11 +14,24 @@ export default function FormRegister (): JSX.Element {
   const theme = useTheme()
 
   const validationSchema = Yup.object().shape({
-    nomeCompleto: Yup.string().required('Campo obrigatório'),
+    nomeCompleto: Yup.string()
+      .required('Campo obrigatório')
+      .min(6, 'Nome invalido!')
+      .matches(/^[a-zA-ZÀ-ÿ\s'-]+$/, 'Nome completo deve conter apenas letras!'),
     email: Yup.string().required('Campo obrigatório').email('E-mail inválido'),
-    telefone: Yup.string().required('Campo obrigatório'),
-    senha: Yup.string().required('Campo obrigatório'),
-    confirmeSenha: Yup.string().required('Campo obrigatório')
+    telefone: Yup.string()
+      .required('Campo obrigatório')
+      .test('phone-length', 'Telefone deve ter 11 dígitos', val => (val.length > 0) && val.replace(/\D/g, '').length === 11),
+    senha: Yup.string()
+      .required('Campo obrigatório')
+      .min(8, 'Sua senha deve ter pelo menos 8 caracteres')
+      .matches(/[a-z]/, 'Sua senha deve conter pelo menos 1 letra minúscula')
+      .matches(/[A-Z]/, 'Sua senha deve conter pelo menos 1 letra maiúscula')
+      .matches(/[0-9]/, 'Sua senha deve conter pelo menos 1 número')
+      .matches(/[@$!%*?&]/, 'Sua senha deve conter pelo menos 1 caractere especial'),
+    confirmeSenha: Yup.string()
+      .required('Campo obrigatório')
+      .oneOf([Yup.ref('senha')], 'As senhas precisam ser iguais')
   })
 
   const initialValues = {
@@ -54,7 +67,7 @@ export default function FormRegister (): JSX.Element {
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
-      {({ values, errors, handleChange, handleSubmit }) => (
+      {({ values, errors, handleChange, handleSubmit, touched }) => (
         <Form
           onSubmit={handleSubmit}
           noValidate
@@ -75,8 +88,8 @@ export default function FormRegister (): JSX.Element {
               variant='outlined'
               value={values.nomeCompleto}
               onChange={handleChange}
-              helperText={errors.nomeCompleto}
-              error={Boolean(errors.nomeCompleto)}
+              helperText={touched.nomeCompleto !== undefined ? errors.nomeCompleto : ''}
+              error={Boolean(touched.nomeCompleto !== undefined ? errors.nomeCompleto : '')}
             />
             <CustomTextField
               fullWidth
@@ -86,8 +99,8 @@ export default function FormRegister (): JSX.Element {
               variant='outlined'
               value={values.email}
               onChange={handleChange}
-              helperText={errors.email}
-              error={Boolean(errors.email)}
+              helperText={touched.email !== undefined ? errors.email : ''}
+              error={Boolean(touched.email !== undefined ? errors.email : '')}
             />
             <CustomTextFieldPhone
               fullWidth
@@ -96,8 +109,8 @@ export default function FormRegister (): JSX.Element {
               variant='outlined'
               value={values.telefone}
               onChange={handleChange}
-              helperText={errors.telefone}
-              error={Boolean(errors.telefone)}
+              helperText={touched.telefone !== undefined ? errors.telefone : ''}
+              error={Boolean(touched.telefone !== undefined ? errors.telefone : '')}
             />
             <CustomTextFieldPassword
               fullWidth
@@ -106,8 +119,8 @@ export default function FormRegister (): JSX.Element {
               variant='outlined'
               value={values.senha}
               onChange={handleChange}
-              helperText={errors.senha}
-              error={Boolean(errors.senha)}
+              helperText={touched.senha !== undefined ? errors.senha : ''}
+              error={Boolean(touched.senha !== undefined ? errors.senha : '')}
             />
             <CustomTextFieldPassword
               fullWidth
@@ -116,11 +129,11 @@ export default function FormRegister (): JSX.Element {
               variant='outlined'
               value={values.confirmeSenha}
               onChange={handleChange}
-              helperText={errors.confirmeSenha}
-              error={Boolean(errors.confirmeSenha)}
+              helperText={touched.confirmeSenha !== undefined ? errors.confirmeSenha : ''}
+              error={Boolean(touched.confirmeSenha !== undefined ? errors.confirmeSenha : '')}
             />
             <CriterionPassword />
-            {JSON.stringify(errors, null, 2)}
+            {/* {JSON.stringify(errors, null, 2)} */}
             <CustonButton
               type="submit"
               fullWidth
