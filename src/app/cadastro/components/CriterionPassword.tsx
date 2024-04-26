@@ -1,15 +1,22 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useState } from 'react'
+import React from 'react'
 
 import { Box, useTheme } from '@mui/material'
 
-import CustomTypography from '@/components/text/CustomTypography'
 import IconTextPassword from './IconTextPassword'
+import CustomTypography from '@/components/text/CustomTypography'
 
-export default function CriterionPassword (): JSX.Element {
+interface CriterionPasswordProps {
+  senha: string
+}
+
+export default function CriterionPassword ({ senha }: CriterionPasswordProps): JSX.Element {
   const theme = useTheme()
 
-  const [validPassword, setValidPassword] = useState(true)
+  const hasSpecialChar = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+/.test(senha)
+  const hasLowercase = /[a-z]+/.test(senha)
+  const hasUppercase = /[A-Z]+/.test(senha)
+  const hasMinLength = senha.length >= 8
+  const hasNumber = /[0-9]+/.test(senha)
 
   return (
     <Box
@@ -24,11 +31,11 @@ export default function CriterionPassword (): JSX.Element {
         <CustomTypography text="Sua senha deve conter:" variant="body2" />
       </Box>
       <Box ml={theme.spacing(0.5)}>
-        <IconTextPassword text='Pelo menos 8 caracteres' validPassword={validPassword} />
-        <IconTextPassword text='Pelo menos 1 caractere especial' validPassword={validPassword} />
-        <IconTextPassword text='Pelo menos 1 número' validPassword={validPassword} />
-        <IconTextPassword text='Pelo menos 1 letra minúscula' validPassword={validPassword} />
-        <IconTextPassword text='Pelo menos 1 letra maiúscula' validPassword={validPassword} />
+        <IconTextPassword text='Pelo menos 8 caracteres' validations={hasMinLength} />
+        <IconTextPassword text='Pelo menos 1 caractere especial' validations={hasSpecialChar} />
+        <IconTextPassword text='Pelo menos 1 número' validations={hasNumber} />
+        <IconTextPassword text='Pelo menos 1 letra minúscula' validations={hasLowercase} />
+        <IconTextPassword text='Pelo menos 1 letra maiúscula' validations={hasUppercase} />
       </Box>
     </Box>
   )

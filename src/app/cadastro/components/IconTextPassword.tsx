@@ -7,16 +7,16 @@ import CloseIcon from '@mui/icons-material/Close'
 import CustomTypography from '@/components/text/CustomTypography'
 
 interface IconTextPasswordProps {
-  validPassword: boolean
+  validations: boolean
   text: string
 }
 
-export default function IconTextPassword ({ validPassword, text }: IconTextPasswordProps): JSX.Element {
+export default function IconTextPassword ({ validations, text }: IconTextPasswordProps): JSX.Element {
   const theme = useTheme()
 
   return (
     <Box display="flex" alignItems="center">
-      {validPassword
+      {validations
         ? <CheckIcon
           sx={{
             color: theme.palette.iconLogin.colorSuccess,

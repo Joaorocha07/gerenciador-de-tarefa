@@ -24,11 +24,11 @@ export default function FormRegister (): JSX.Element {
       .test('phone-length', 'Telefone deve ter 11 dígitos', val => (val.length > 0) && val.replace(/\D/g, '').length === 11),
     senha: Yup.string()
       .required('Campo obrigatório')
-      .min(8, 'Sua senha deve ter pelo menos 8 caracteres')
-      .matches(/[a-z]/, 'Sua senha deve conter pelo menos 1 letra minúscula')
-      .matches(/[A-Z]/, 'Sua senha deve conter pelo menos 1 letra maiúscula')
-      .matches(/[0-9]/, 'Sua senha deve conter pelo menos 1 número')
-      .matches(/[@$!%*?&]/, 'Sua senha deve conter pelo menos 1 caractere especial'),
+      .min(8, 'Pelo menos 8 caracteres')
+      .matches(/[a-z]/, 'Pelo menos 1 letra minúscula')
+      .matches(/[A-Z]/, 'Pelo menos 1 letra maiúscula')
+      .matches(/[0-9]/, 'Pelo menos 1 número')
+      .matches(/[@$!%*?&]/, 'Pelo menos 1 caractere especial'),
     confirmeSenha: Yup.string()
       .required('Campo obrigatório')
       .oneOf([Yup.ref('senha')], 'As senhas precisam ser iguais')
@@ -132,7 +132,7 @@ export default function FormRegister (): JSX.Element {
               helperText={touched.confirmeSenha !== undefined ? errors.confirmeSenha : ''}
               error={Boolean(touched.confirmeSenha !== undefined ? errors.confirmeSenha : '')}
             />
-            <CriterionPassword />
+            <CriterionPassword senha={values.senha}/>
             {/* {JSON.stringify(errors, null, 2)} */}
             <CustonButton
               type="submit"
