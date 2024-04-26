@@ -7,6 +7,7 @@ import * as Yup from 'yup'
 import CriterionPassword from './CriterionPassword'
 import CustonButton from '@/components/button/custom-button'
 import CustomTextField from '@/components/textfield/custom-text-field'
+import CustomTextFieldPhone from '@/components/textfield/custom-text-field-phone'
 import CustomTextFieldPassword from '@/components/textfield/custom-text-field-password'
 
 export default function FormRegister (): JSX.Element {
@@ -88,10 +89,9 @@ export default function FormRegister (): JSX.Element {
               helperText={errors.email}
               error={Boolean(errors.email)}
             />
-            <CustomTextField
+            <CustomTextFieldPhone
               fullWidth
               name='telefone'
-              type="tel"
               label='Telefone'
               variant='outlined'
               value={values.telefone}
