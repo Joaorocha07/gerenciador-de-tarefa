@@ -14,7 +14,7 @@ export default function FormRegister (): JSX.Element {
 
   const validationSchema = Yup.object().shape({
     nomeCompleto: Yup.string().required('Campo obrigatório'),
-    email: Yup.string().required('Campo obrigatório'),
+    email: Yup.string().required('Campo obrigatório').email('E-mail inválido'),
     telefone: Yup.string().required('Campo obrigatório'),
     senha: Yup.string().required('Campo obrigatório'),
     confirmeSenha: Yup.string().required('Campo obrigatório')

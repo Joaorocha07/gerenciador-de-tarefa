@@ -33,7 +33,8 @@ export default function CustomTextFieldPassword ({
   rows,
   isDisable,
   onChange,
-  onBlur
+  onBlur,
+  ...otherProps
 }: CustomTextFieldPasswordProps): JSX.Element {
   const theme = useTheme()
   const [showPassword, setShowPassword] = useState<boolean>(false)
@@ -57,6 +58,7 @@ export default function CustomTextFieldPassword ({
       rows={rows}
       disabled={isDisable}
       onBlur={onBlur}
+      {...otherProps}
       sx={{
         '& .MuiOutlinedInput-root': {
           '& fieldset': {

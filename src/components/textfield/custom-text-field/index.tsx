@@ -34,7 +34,8 @@ export default function CustomTextField ({
   rows,
   isDisable,
   onChange,
-  onBlur
+  onBlur,
+  ...otherProps
 }: CustomTextFieldProps): JSX.Element {
   const theme = useTheme()
 
@@ -53,6 +54,7 @@ export default function CustomTextField ({
       rows={rows}
       disabled={isDisable}
       onBlur={onBlur}
+      {...otherProps}
       sx={{
         '& .MuiOutlinedInput-root': {
           '& fieldset': {
