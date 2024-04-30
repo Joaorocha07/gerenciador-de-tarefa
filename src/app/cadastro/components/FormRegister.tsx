@@ -10,7 +10,12 @@ import CustomTextField from '@/components/textfield/custom-text-field'
 import CustomTextFieldPhone from '@/components/textfield/custom-text-field-phone'
 import CustomTextFieldPassword from '@/components/textfield/custom-text-field-password'
 
-export default function FormRegister (): JSX.Element {
+interface IFormRegisterProps {
+  handleAdvanceStep: () => void
+  handleBackStep: () => void
+}
+
+export default function FormRegister ({ handleAdvanceStep, handleBackStep }: IFormRegisterProps): JSX.Element {
   const theme = useTheme()
 
   const validationSchema = Yup.object().shape({
@@ -28,7 +33,7 @@ export default function FormRegister (): JSX.Element {
       .matches(/[a-z]/, 'Pelo menos 1 letra minúscula')
       .matches(/[A-Z]/, 'Pelo menos 1 letra maiúscula')
       .matches(/[0-9]/, 'Pelo menos 1 número')
-      .matches(/[@$!%*?&]/, 'Pelo menos 1 caractere especial'),
+      .matches(/[@$!%*?&-]/, 'Pelo menos 1 caractere especial'),
     confirmeSenha: Yup.string()
       .required('Campo obrigatório')
       .oneOf([Yup.ref('senha')], 'As senhas precisam ser iguais')
@@ -59,6 +64,8 @@ export default function FormRegister (): JSX.Element {
     }
 
     console.log(formData)
+
+    handleAdvanceStep()
   }
 
   return (

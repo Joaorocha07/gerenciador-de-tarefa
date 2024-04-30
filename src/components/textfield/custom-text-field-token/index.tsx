@@ -4,7 +4,7 @@ import { TextField, useTheme } from '@mui/material'
 
 import InputMask from 'react-input-mask'
 
-interface CustomTextFieldPhoneProps {
+interface CustomTextFieldTokenProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   variant: 'standard' | 'outlined' | 'filled'
   fullWidth?: boolean
@@ -22,7 +22,7 @@ interface CustomTextFieldPhoneProps {
   onBlur?: () => void
 }
 
-export default function CustomTextFieldPhone ({
+export default function CustomTextFieldToken ({
   label,
   variant,
   fullWidth,
@@ -36,12 +36,12 @@ export default function CustomTextFieldPhone ({
   onChange,
   onBlur,
   ...otherProps
-}: CustomTextFieldPhoneProps): JSX.Element {
+}: CustomTextFieldTokenProps): JSX.Element {
   const theme = useTheme()
 
   return (
     <InputMask
-      mask="(99) 99999-9999"
+      mask="999999"
       maskChar=""
       value={value}
       onChange={onChange}
@@ -60,7 +60,7 @@ export default function CustomTextFieldPhone ({
           rows={rows}
           disabled={isDisable}
           onBlur={onBlur}
-          type="tel"
+          type="text"
           {...otherProps}
           sx={{
             '& .MuiOutlinedInput-root': {

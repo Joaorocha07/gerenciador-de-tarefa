@@ -6,9 +6,8 @@ import { Box, useTheme } from '@mui/material'
 import { type IChildrenProp } from '@/types/global'
 
 import CustomHead from '@/components/custom-head'
+import LoginAndCadastro from '@/layout/login-and-cadastro'
 import SwitchButton from '@/components/button/switchButton'
-import ButtonToggleTheme from '@/components/button/button-toggle-theme'
-import CustomTypography from '@/components/text/CustomTypography'
 
 export default function CadastroLayout ({ children }: IChildrenProp): JSX.Element {
   const theme = useTheme()
@@ -23,51 +22,26 @@ export default function CadastroLayout ({ children }: IChildrenProp): JSX.Elemen
   return (
     <>
       <CustomHead title="Cadastro" />
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '100vh'
-        }}
-      >
-        <Box display="flex" alignItems="center" gap={theme.spacing(2)} mb={theme.spacing(5)}>
-          <CustomTypography text='minha logo' variant='h4' />
-          <ButtonToggleTheme />
-        </Box>
+      <LoginAndCadastro>
         <Box
           sx={{
             display: 'flex',
-            flexDirection: 'column',
-            gap: theme.spacing(3),
-            border: `0.5px solid ${theme.palette.primary.dark}`,
-            borderRadius: '12px',
-            padding: '1.3rem',
             width: '100%',
-            maxWidth: '360px'
+            backgroundColor: theme.palette.primary.light,
+            borderRadius: '6px',
+            overflow: 'hidden',
+            p: '0.3rem'
           }}
         >
-          <Box
-            sx={{
-              display: 'flex',
-              width: '100%',
-              backgroundColor: theme.palette.primary.light,
-              borderRadius: '6px',
-              overflow: 'hidden',
-              p: '0.3rem'
-            }}
-          >
-            <SwitchButton variant='text' onClick={() => { handleButtonClick('login') }} selected={selectedButton === 'login'}>
+          <SwitchButton variant='text' onClick={() => { handleButtonClick('login') }} selected={selectedButton === 'login'}>
                 Login
-            </SwitchButton>
-            <SwitchButton variant='text' onClick={() => { handleButtonClick('novaConta') }} selected={selectedButton === 'novaConta'}>
+          </SwitchButton>
+          <SwitchButton variant='text' onClick={() => { handleButtonClick('novaConta') }} selected={selectedButton === 'novaConta'}>
                 Nova conta
-            </SwitchButton>
-          </Box>
-          {children}
+          </SwitchButton>
         </Box>
-      </Box>
+        {children}
+      </LoginAndCadastro>
     </>
   )
 }
