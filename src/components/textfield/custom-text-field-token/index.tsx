@@ -2,8 +2,6 @@ import React from 'react'
 
 import { TextField, useTheme } from '@mui/material'
 
-import InputMask from 'react-input-mask'
-
 interface CustomTextFieldTokenProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   variant: 'standard' | 'outlined' | 'filled'
@@ -20,6 +18,10 @@ interface CustomTextFieldTokenProps {
   multiline?: boolean
   rows?: number
   onBlur?: () => void
+  ref?: any
+  onFocus?: any
+  inputRef?: any
+  onKeyDown?: any
 }
 
 export default function CustomTextFieldToken ({
@@ -35,58 +37,64 @@ export default function CustomTextFieldToken ({
   isDisable,
   onChange,
   onBlur,
+  ref,
+  onFocus,
+  inputRef,
+  onKeyDown,
   ...otherProps
 }: CustomTextFieldTokenProps): JSX.Element {
   const theme = useTheme()
 
+  console.log(value)
+
   return (
-    <InputMask
-      mask="999999"
-      maskChar=""
+    <TextField
+      fullWidth={fullWidth}
+      variant={variant}
+      label={label}
+      name={name}
       value={value}
       onChange={onChange}
-    >
-      {(inputProps: any) => (
-        <TextField
-          fullWidth={fullWidth}
-          variant={variant}
-          label={label}
-          name={name}
-          value={inputProps.value}
-          onChange={inputProps.onChange}
-          error={error}
-          helperText={helperText}
-          multiline={multiline}
-          rows={rows}
-          disabled={isDisable}
-          onBlur={onBlur}
-          type="text"
-          {...otherProps}
-          sx={{
-            '& .MuiOutlinedInput-root': {
-              '& fieldset': {
-                borderColor: theme.palette.textfield.border
-              },
-              '&:hover fieldset': {
-                borderColor: theme.palette.textfield.hoverBorder
-              },
-              '&.Mui-focused fieldset': {
-                borderColor: theme.palette.textfield.focusBorder
-              },
-              '& input': {
-                color: theme.palette.textfield.inputText,
-                fontWeight: 'bold'
-              }
-            },
-            '& .MuiInputLabel-root': {
-              color: theme.palette.textfield.placeholder
-            },
-            '& .MuiOutlinedInput-input::placeholder': {
-              color: theme.palette.textfield.placeholder
-            }
-          }}
-        />
-      )}
-    </InputMask>
+      error={error}
+      helperText={helperText}
+      multiline={multiline}
+      rows={rows}
+      disabled={isDisable}
+      onBlur={onBlur}
+      type="text"
+      ref={ref}
+      onFocus={onFocus}
+      inputRef={inputRef}
+      onKeyDown={onKeyDown}
+      {...otherProps}
+      inputProps={{
+        maxLength: 1
+      }}
+      sx={{
+        '& .MuiOutlinedInput-root': {
+          '& fieldset': {
+            borderColor: theme.palette.textfield.border
+          },
+          '&:hover fieldset': {
+            borderColor: theme.palette.textfield.hoverBorder
+          },
+          '&.Mui-focused fieldset': {
+            borderColor: theme.palette.textfield.focusBorder
+          },
+          '& input': {
+            textTransform: 'uppercase',
+            color: theme.palette.textfield.inputText,
+            fontWeight: 'bold'
+          }
+        },
+        '& .MuiInputLabel-root': {
+          color: theme.palette.textfield.placeholder
+        },
+        '& .MuiOutlinedInput-input::placeholder': {
+          color: theme.palette.textfield.placeholder
+        },
+        width: '20%'
+      }}
+    />
   )
 }

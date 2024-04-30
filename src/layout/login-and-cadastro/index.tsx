@@ -33,7 +33,7 @@ export default function LoginAndCadastro ({ children }: IChildrenProp): JSX.Elem
           borderRadius: '12px',
           padding: '1.3rem',
           width: '100%',
-          maxWidth: '360px'
+          maxWidth: '400px'
         }}
       >
         {children}

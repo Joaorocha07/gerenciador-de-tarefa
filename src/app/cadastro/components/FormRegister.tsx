@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { Form, Formik } from 'formik'
+import { useSwitch } from '@/hook/useSwitch'
 import { Box, useTheme } from '@mui/material'
 
 import * as Yup from 'yup'
@@ -9,6 +10,8 @@ import CustonButton from '@/components/button/custom-button'
 import CustomTextField from '@/components/textfield/custom-text-field'
 import CustomTextFieldPhone from '@/components/textfield/custom-text-field-phone'
 import CustomTextFieldPassword from '@/components/textfield/custom-text-field-password'
+import SwitchButton from '@/components/button/switchButton'
+import CustomTypography from '@/components/text/CustomTypography'
 
 interface IFormRegisterProps {
   handleAdvanceStep: () => void
@@ -17,6 +20,7 @@ interface IFormRegisterProps {
 
 export default function FormRegister ({ handleAdvanceStep, handleBackStep }: IFormRegisterProps): JSX.Element {
   const theme = useTheme()
+  const { selectedButton, handleButtonClick } = useSwitch()
 
   const validationSchema = Yup.object().shape({
     nomeCompleto: Yup.string()
@@ -69,88 +73,110 @@ export default function FormRegister ({ handleAdvanceStep, handleBackStep }: IFo
   }
 
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={handleSubmit}
-    >
-      {({ values, errors, handleChange, handleSubmit, touched }) => (
-        <Form
-          onSubmit={handleSubmit}
-          noValidate
-          autoComplete="off"
-        >
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: theme.spacing(2)
-            }}
+    <>
+      <Box textAlign="center">
+        <CustomTypography text="Nova conta" variant="body1" />
+      </Box>
+      <Box
+        sx={{
+          display: 'flex',
+          width: '100%',
+          backgroundColor: theme.palette.primary.light,
+          borderRadius: '6px',
+          overflow: 'hidden',
+          p: '0.3rem'
+        }}
+      >
+        <SwitchButton variant='text' onClick={() => { handleButtonClick('login') }} selected={selectedButton === 'login'}>
+                  Login
+        </SwitchButton>
+        <SwitchButton variant='text' onClick={() => { handleButtonClick('novaConta') }} selected={selectedButton === 'novaConta'}>
+                  Nova conta
+        </SwitchButton>
+      </Box>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ values, errors, handleChange, handleSubmit, touched }) => (
+          <Form
+            onSubmit={handleSubmit}
+            noValidate
+            autoComplete="off"
           >
-            <CustomTextField
-              fullWidth
-              name='nomeCompleto'
-              type="text"
-              label='Nome e sobrenome'
-              variant='outlined'
-              value={values.nomeCompleto}
-              onChange={handleChange}
-              helperText={touched.nomeCompleto !== undefined ? errors.nomeCompleto : ''}
-              error={Boolean(touched.nomeCompleto !== undefined ? errors.nomeCompleto : '')}
-            />
-            <CustomTextField
-              fullWidth
-              name='email'
-              type="email"
-              label='E-mail'
-              variant='outlined'
-              value={values.email}
-              onChange={handleChange}
-              helperText={touched.email !== undefined ? errors.email : ''}
-              error={Boolean(touched.email !== undefined ? errors.email : '')}
-            />
-            <CustomTextFieldPhone
-              fullWidth
-              name='telefone'
-              label='Telefone'
-              variant='outlined'
-              value={values.telefone}
-              onChange={handleChange}
-              helperText={touched.telefone !== undefined ? errors.telefone : ''}
-              error={Boolean(touched.telefone !== undefined ? errors.telefone : '')}
-            />
-            <CustomTextFieldPassword
-              fullWidth
-              name="senha"
-              label='Senha'
-              variant='outlined'
-              value={values.senha}
-              onChange={handleChange}
-              helperText={touched.senha !== undefined ? errors.senha : ''}
-              error={Boolean(touched.senha !== undefined ? errors.senha : '')}
-            />
-            <CustomTextFieldPassword
-              fullWidth
-              name="confirmeSenha"
-              label='Confirme sua senha'
-              variant='outlined'
-              value={values.confirmeSenha}
-              onChange={handleChange}
-              helperText={touched.confirmeSenha !== undefined ? errors.confirmeSenha : ''}
-              error={Boolean(touched.confirmeSenha !== undefined ? errors.confirmeSenha : '')}
-            />
-            <CriterionPassword senha={values.senha}/>
-            {/* {JSON.stringify(errors, null, 2)} */}
-            <CustonButton
-              type="submit"
-              fullWidth
-              onClick={() => {}}
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: theme.spacing(2)
+              }}
             >
+              <CustomTextField
+                fullWidth
+                name='nomeCompleto'
+                type="text"
+                label='Nome e sobrenome'
+                variant='outlined'
+                value={values.nomeCompleto}
+                onChange={handleChange}
+                helperText={touched.nomeCompleto !== undefined ? errors.nomeCompleto : ''}
+                error={Boolean(touched.nomeCompleto !== undefined ? errors.nomeCompleto : '')}
+              />
+              <CustomTextField
+                fullWidth
+                name='email'
+                type="email"
+                label='E-mail'
+                variant='outlined'
+                value={values.email}
+                onChange={handleChange}
+                helperText={touched.email !== undefined ? errors.email : ''}
+                error={Boolean(touched.email !== undefined ? errors.email : '')}
+              />
+              <CustomTextFieldPhone
+                fullWidth
+                name='telefone'
+                label='Telefone'
+                variant='outlined'
+                value={values.telefone}
+                onChange={handleChange}
+                helperText={touched.telefone !== undefined ? errors.telefone : ''}
+                error={Boolean(touched.telefone !== undefined ? errors.telefone : '')}
+              />
+              <CustomTextFieldPassword
+                fullWidth
+                name="senha"
+                label='Senha'
+                variant='outlined'
+                value={values.senha}
+                onChange={handleChange}
+                helperText={touched.senha !== undefined ? errors.senha : ''}
+                error={Boolean(touched.senha !== undefined ? errors.senha : '')}
+              />
+              <CustomTextFieldPassword
+                fullWidth
+                name="confirmeSenha"
+                label='Confirme sua senha'
+                variant='outlined'
+                value={values.confirmeSenha}
+                onChange={handleChange}
+                helperText={touched.confirmeSenha !== undefined ? errors.confirmeSenha : ''}
+                error={Boolean(touched.confirmeSenha !== undefined ? errors.confirmeSenha : '')}
+              />
+              <CriterionPassword senha={values.senha}/>
+              {/* {JSON.stringify(errors, null, 2)} */}
+              <CustonButton
+                type="submit"
+                fullWidth
+                onClick={() => {}}
+              >
               Criar conta
-            </CustonButton>
-          </Box>
-        </Form>
-      )}
-    </Formik>
+              </CustonButton>
+            </Box>
+          </Form>
+        )}
+      </Formik>
+    </>
   )
 }
