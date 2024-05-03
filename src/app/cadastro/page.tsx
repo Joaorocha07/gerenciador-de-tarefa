@@ -5,7 +5,7 @@ import FormRegister from './components/FormRegister'
 import ValidarEmail from './components/validar-email'
 
 export default function Cadastro (): JSX.Element {
-  const [activeStep, setActiveStep] = useState(1)
+  const [activeStep, setActiveStep] = useState(0)
 
   const handleAdvanceStep = (): void => {
     setActiveStep(prevState => prevState + 1)

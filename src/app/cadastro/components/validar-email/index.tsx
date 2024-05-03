@@ -1,7 +1,8 @@
-import React, { useRef } from 'react'
+import React, { useContext, useRef } from 'react'
 
 import { Form, Formik } from 'formik'
 import { Box, useTheme } from '@mui/material'
+import { CadastroContext } from '@/contexts/Cadastro/CadastroContext'
 
 import * as Yup from 'yup'
 import CustonButton from '@/components/button/custom-button'
@@ -18,6 +19,7 @@ export default function ValidarEmail ({
   handleBackStep
 }: IValidarEmailProps): JSX.Element {
   const theme = useTheme()
+  const context = useContext(CadastroContext)
 
   const tokenOneRef = useRef(null)
   const tokenTwoRef = useRef(null)
@@ -28,25 +30,15 @@ export default function ValidarEmail ({
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, nextRef: React.MutableRefObject<HTMLInputElement | null>): void => {
     const isValidCharacter = /[a-zA-Z0-9]/.test(e.key)
-    const isBackspaceOrDelete = e.key === 'Backspace' || e.key === 'Delete'
-
     console.log(e.key)
-
-    console.log(isBackspaceOrDelete)
-
     if (e.key === 'Backspace') {
-      e.preventDefault()
-      console.log('aqui')
-      return
+      console.log(e)
     }
 
     if (isValidCharacter && (nextRef.current != null)) {
       setTimeout(() => {
         nextRef.current?.focus()
       }, 0)
-    } else if (!isBackspaceOrDelete || e.currentTarget.value === '') {
-      console.log('aqui')
-      e.preventDefault()
     }
   }
 
@@ -83,7 +75,9 @@ export default function ValidarEmail ({
 
     console.log(formData)
 
-    // handleAdvanceStep()
+    console.log(context?.state.formcadastro)
+
+    handleAdvanceStep()
   }
 
   return (
@@ -104,7 +98,8 @@ export default function ValidarEmail ({
               sx={{
                 display: 'flex',
                 flexDirection: 'row',
-                gap: theme.spacing(1)
+                gap: theme.spacing(1),
+                mb: theme.spacing(1)
               }}
             >
               <CustomTextFieldToken
@@ -180,13 +175,12 @@ export default function ValidarEmail ({
                 error={Boolean(touched.tokenSix !== undefined ? errors.tokenSix : '')}
               />
             </Box>
-            {JSON.stringify(values, null, 2)}
             <CustonButton
               type="submit"
               fullWidth
               onClick={() => {}}
             >
-              Criar conta
+              Validar token
             </CustonButton>
           </Form>
         )}

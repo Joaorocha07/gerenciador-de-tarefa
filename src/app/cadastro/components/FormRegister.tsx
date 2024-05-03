@@ -1,17 +1,19 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import { Form, Formik } from 'formik'
 import { useSwitch } from '@/hook/useSwitch'
 import { Box, useTheme } from '@mui/material'
+import { CadastroContext } from '@/contexts/Cadastro/CadastroContext'
 
 import * as Yup from 'yup'
 import CriterionPassword from './CriterionPassword'
+import ValidaToken from '@/services/cadastro/ValidaToken'
+import SwitchButton from '@/components/button/switchButton'
 import CustonButton from '@/components/button/custom-button'
+import CustomTypography from '@/components/text/CustomTypography'
 import CustomTextField from '@/components/textfield/custom-text-field'
 import CustomTextFieldPhone from '@/components/textfield/custom-text-field-phone'
 import CustomTextFieldPassword from '@/components/textfield/custom-text-field-password'
-import SwitchButton from '@/components/button/switchButton'
-import CustomTypography from '@/components/text/CustomTypography'
 
 interface IFormRegisterProps {
   handleAdvanceStep: () => void
@@ -20,6 +22,8 @@ interface IFormRegisterProps {
 
 export default function FormRegister ({ handleAdvanceStep, handleBackStep }: IFormRegisterProps): JSX.Element {
   const theme = useTheme()
+  const context = useContext(CadastroContext)
+
   const { selectedButton, handleButtonClick } = useSwitch()
 
   const validationSchema = Yup.object().shape({
@@ -67,7 +71,16 @@ export default function FormRegister ({ handleAdvanceStep, handleBackStep }: IFo
       confirmeSenha
     }
 
-    console.log(formData)
+    const response = await ValidaToken({
+      nome: formData.nomeCompleto ?? '',
+      email: formData.email ?? ''
+    })
+
+    if (response === null) {
+      return
+    }
+
+    context?.saveCadastro(formData)
 
     handleAdvanceStep()
   }
@@ -165,7 +178,6 @@ export default function FormRegister ({ handleAdvanceStep, handleBackStep }: IFo
                 error={Boolean(touched.confirmeSenha !== undefined ? errors.confirmeSenha : '')}
               />
               <CriterionPassword senha={values.senha}/>
-              {/* {JSON.stringify(errors, null, 2)} */}
               <CustonButton
                 type="submit"
                 fullWidth
