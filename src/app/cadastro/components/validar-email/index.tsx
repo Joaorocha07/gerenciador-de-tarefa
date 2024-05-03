@@ -9,6 +9,7 @@ import ValidarToken from '@/services/cadastro/ValidarToken'
 import CustonButton from '@/components/button/custom-button'
 import CustomTypography from '@/components/text/CustomTypography'
 import CustomTextFieldToken from '@/components/textfield/custom-text-field-token'
+import Swal from 'sweetalert2'
 
 interface IValidarEmailProps {
   handleAdvanceStep: () => void
@@ -65,23 +66,39 @@ export default function ValidarEmail ({
     tokenSix
   }:
     typeof initialValues): Promise<void> => {
-    const formData = {
-      tokenOne,
-      tokenTwo,
-      tokenThree,
-      tokenFour,
-      tokenFive,
-      tokenSix
-    }
+    const combinedTokens = `${tokenOne}${tokenTwo}${tokenThree}${tokenFour}${tokenFive}${tokenSix}`
+    const token = combinedTokens.toUpperCase()
+
+    console.log(token)
 
     const response = await ValidarToken({
-      codigo: formData.tokenFive ?? '',
+      codigo: token ?? '',
       email: context?.state.formcadastro.email ?? ''
     })
 
     console.log(response)
 
-    console.log(formData)
+    if (response.error === false) {
+      void Swal.fire({
+        icon: 'success',
+        title: 'Sucesso!',
+        text: response.msgUser
+      }).then((result) => {
+        if (result.isConfirmed) {
+          console.log('fazer alguma coisa aqui')
+        }
+      })
+    } else if (response.error === true) {
+      void Swal.fire({
+        icon: 'error',
+        title: 'Sucesso!',
+        text: response.msgUser
+      }).then((result) => {
+        if (result.isConfirmed) {
+          console.log('fazer alguma coisa aqui')
+        }
+      })
+    }
 
     console.log(context?.state.formcadastro)
   }

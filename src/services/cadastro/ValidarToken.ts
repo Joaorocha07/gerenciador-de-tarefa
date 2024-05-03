@@ -2,7 +2,7 @@
 
 import { type ITokenFormResponse } from '@/types/cadastro'
 
-interface IObservacoesDataArgs {
+interface IValidarTokenArgs {
   codigo: string
   email: string
 }
@@ -10,7 +10,7 @@ interface IObservacoesDataArgs {
 export default async function ValidarToken ({
   codigo,
   email
-}: IObservacoesDataArgs): Promise<any> {
+}: IValidarTokenArgs): Promise<any> {
   try {
     const apiUrl = `${
       process.env.NEXT_PUBLIC_API ?? ''

@@ -3,6 +3,7 @@ import React, { useContext } from 'react'
 import { Form, Formik } from 'formik'
 import { useSwitch } from '@/hook/useSwitch'
 import { Box, useTheme } from '@mui/material'
+import { showError } from '@/components/msgAlert/show-error'
 import { CadastroContext } from '@/contexts/Cadastro/CadastroContext'
 
 import * as Yup from 'yup'
@@ -14,6 +15,7 @@ import CustomTypography from '@/components/text/CustomTypography'
 import CustomTextField from '@/components/textfield/custom-text-field'
 import CustomTextFieldPhone from '@/components/textfield/custom-text-field-phone'
 import CustomTextFieldPassword from '@/components/textfield/custom-text-field-password'
+import Swal from 'sweetalert2'
 
 interface IFormRegisterProps {
   handleAdvanceStep: () => void
@@ -76,13 +78,22 @@ export default function FormRegister ({ handleAdvanceStep, handleBackStep }: IFo
       email: formData.email ?? ''
     })
 
-    if (response === null) {
-      return
+    console.log(response)
+
+    if (response.error === false) {
+      void Swal.fire({
+        icon: 'success',
+        title: 'Sucesso!',
+        text: response.msgUser
+      }).then((result) => {
+        if (result.isConfirmed) {
+          handleAdvanceStep()
+          context?.saveCadastro(formData)
+        }
+      })
+    } else if (response.error === true) {
+      showError('Houve um erro ao finalizar seu cadastro, tente novamente mais tarde!')
     }
-
-    context?.saveCadastro(formData)
-
-    handleAdvanceStep()
   }
 
   return (
