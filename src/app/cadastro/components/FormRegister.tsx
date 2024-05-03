@@ -7,7 +7,7 @@ import { CadastroContext } from '@/contexts/Cadastro/CadastroContext'
 
 import * as Yup from 'yup'
 import CriterionPassword from './CriterionPassword'
-import ValidaToken from '@/services/cadastro/ValidaToken'
+import EnviarToken from '@/services/cadastro/EnviarToken'
 import SwitchButton from '@/components/button/switchButton'
 import CustonButton from '@/components/button/custom-button'
 import CustomTypography from '@/components/text/CustomTypography'
@@ -71,7 +71,7 @@ export default function FormRegister ({ handleAdvanceStep, handleBackStep }: IFo
       confirmeSenha
     }
 
-    const response = await ValidaToken({
+    const response = await EnviarToken({
       nome: formData.nomeCompleto ?? '',
       email: formData.email ?? ''
     })

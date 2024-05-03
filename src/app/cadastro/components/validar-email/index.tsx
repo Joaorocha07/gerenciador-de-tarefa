@@ -5,6 +5,7 @@ import { Box, useTheme } from '@mui/material'
 import { CadastroContext } from '@/contexts/Cadastro/CadastroContext'
 
 import * as Yup from 'yup'
+import ValidarToken from '@/services/cadastro/ValidarToken'
 import CustonButton from '@/components/button/custom-button'
 import CustomTypography from '@/components/text/CustomTypography'
 import CustomTextFieldToken from '@/components/textfield/custom-text-field-token'
@@ -73,11 +74,16 @@ export default function ValidarEmail ({
       tokenSix
     }
 
+    const response = await ValidarToken({
+      codigo: formData.tokenFive ?? '',
+      email: context?.state.formcadastro.email ?? ''
+    })
+
+    console.log(response)
+
     console.log(formData)
 
     console.log(context?.state.formcadastro)
-
-    handleAdvanceStep()
   }
 
   return (

@@ -3,12 +3,12 @@
 import { type ITokenFormResponse } from '@/types/cadastro'
 
 interface IObservacoesDataArgs {
-  nome: string
+  codigo: string
   email: string
 }
 
-export default async function ValidaToken ({
-  nome,
+export default async function ValidarToken ({
+  codigo,
   email
 }: IObservacoesDataArgs): Promise<any> {
   try {
@@ -17,7 +17,7 @@ export default async function ValidaToken ({
     }/coding`
 
     const body = JSON.stringify({
-      nome,
+      codigo,
       email
     })
 

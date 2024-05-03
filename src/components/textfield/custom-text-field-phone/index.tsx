@@ -41,7 +41,7 @@ export default function CustomTextFieldPhone ({
 
   return (
     <InputMask
-      mask="(99) 99999-9999"
+      mask="(99) 9 9999-9999"
       maskChar=""
       value={value}
       onChange={onChange}
