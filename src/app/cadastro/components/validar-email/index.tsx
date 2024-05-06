@@ -1,15 +1,12 @@
-import React, { useContext, useRef } from 'react'
+import React, { useRef } from 'react'
 
 import { Form, Formik } from 'formik'
-import { Box, useTheme } from '@mui/material'
-import { CadastroContext } from '@/contexts/Cadastro/CadastroContext'
+import { Box, Button, Link, useTheme } from '@mui/material'
+import { useValidationEmail } from '@/hook/cadastro/useValidationEmail'
 
-import * as Yup from 'yup'
-import ValidarToken from '@/services/cadastro/ValidarToken'
+import FormEmail from './FormEmail'
 import CustonButton from '@/components/button/custom-button'
 import CustomTypography from '@/components/text/CustomTypography'
-import CustomTextFieldToken from '@/components/textfield/custom-text-field-token'
-import Swal from 'sweetalert2'
 
 interface IValidarEmailProps {
   handleAdvanceStep: () => void
@@ -21,7 +18,6 @@ export default function ValidarEmail ({
   handleBackStep
 }: IValidarEmailProps): JSX.Element {
   const theme = useTheme()
-  const context = useContext(CadastroContext)
 
   const tokenOneRef = useRef(null)
   const tokenTwoRef = useRef(null)
@@ -30,81 +26,22 @@ export default function ValidarEmail ({
   const tokenFiveRef = useRef(null)
   const tokenSixRef = useRef(null)
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, nextRef: React.MutableRefObject<HTMLInputElement | null>): void => {
-    const isValidCharacter = /[a-zA-Z0-9]/.test(e.key)
-    console.log(e.key)
-    if (e.key === 'Backspace') {
-      console.log(e)
-    }
-
-    if (isValidCharacter && (nextRef.current != null)) {
-      setTimeout(() => {
-        nextRef.current?.focus()
-      }, 0)
-    }
-  }
-
-  const validationSchema = Yup.object().shape({
-    tokenOne: Yup.string().required('Campo obrigatório')
-  })
-
-  const initialValues = {
-    tokenOne: '',
-    tokenTwo: '',
-    tokenThree: '',
-    tokenFour: '',
-    tokenFive: '',
-    tokenSix: ''
-  }
-
-  const handleSubmit = async ({
-    tokenOne,
-    tokenTwo,
-    tokenThree,
-    tokenFour,
-    tokenFive,
-    tokenSix
-  }:
-    typeof initialValues): Promise<void> => {
-    const combinedTokens = `${tokenOne}${tokenTwo}${tokenThree}${tokenFour}${tokenFive}${tokenSix}`
-    const token = combinedTokens.toUpperCase()
-
-    console.log(token)
-
-    const response = await ValidarToken({
-      codigo: token ?? '',
-      email: context?.state.formcadastro.email ?? ''
-    })
-
-    console.log(response)
-
-    if (response.error === false) {
-      void Swal.fire({
-        icon: 'success',
-        title: 'Sucesso!',
-        text: response.msgUser
-      }).then((result) => {
-        if (result.isConfirmed) {
-          console.log('fazer alguma coisa aqui')
-        }
-      })
-    } else if (response.error === true) {
-      void Swal.fire({
-        icon: 'error',
-        title: 'Sucesso!',
-        text: response.msgUser
-      }).then((result) => {
-        if (result.isConfirmed) {
-          console.log('fazer alguma coisa aqui')
-        }
-      })
-    }
-
-    console.log(context?.state.formcadastro)
-  }
+  const { handleKeyDown, initialValues, validationSchema, handleSubmit } = useValidationEmail()
 
   return (
     <>
+      <Button onClick={handleBackStep}
+        style={{
+          border: 'none',
+          background: 'none',
+          color: 'inherit',
+          padding: 0,
+          font: 'inherit',
+          cursor: 'pointer',
+          textDecoration: 'none'
+        }}>
+        <Link>Voltar</Link>
+      </Button>
       <CustomTypography text='Enviamos um codigo para o seu e-mail, valide-o!' variant='body1' />
       <Formik
         initialValues={initialValues}
@@ -125,77 +62,18 @@ export default function ValidarEmail ({
                 mb: theme.spacing(1)
               }}
             >
-              <CustomTextFieldToken
-                fullWidth
-                name='tokenOne'
-                label=''
-                variant='outlined'
-                value={values.tokenOne}
-                onChange={handleChange}
-                onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => { handleKeyDown(e, tokenTwoRef) }}
-                inputRef={tokenOneRef}
-                helperText={touched.tokenOne !== undefined ? errors.tokenOne : ''}
-                error={Boolean(touched.tokenOne !== undefined ? errors.tokenOne : '')}
-              />
-              <CustomTextFieldToken
-                fullWidth
-                name='tokenTwo'
-                label=''
-                variant='outlined'
-                value={values.tokenTwo}
-                onChange={handleChange}
-                onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => { handleKeyDown(e, tokenThreeRef) }}
-                inputRef={tokenTwoRef}
-                helperText={touched.tokenTwo !== undefined ? errors.tokenTwo : ''}
-                error={Boolean(touched.tokenTwo !== undefined ? errors.tokenTwo : '')}
-              />
-              <CustomTextFieldToken
-                fullWidth
-                name='tokenThree'
-                label=''
-                variant='outlined'
-                value={values.tokenThree}
-                onChange={handleChange}
-                onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => { handleKeyDown(e, tokenFourRef) }}
-                inputRef={tokenThreeRef}
-                helperText={touched.tokenThree !== undefined ? errors.tokenThree : ''}
-                error={Boolean(touched.tokenThree !== undefined ? errors.tokenThree : '')}
-              />
-              <CustomTextFieldToken
-                fullWidth
-                name='tokenFour'
-                label=''
-                variant='outlined'
-                value={values.tokenFour}
-                onChange={handleChange}
-                onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => { handleKeyDown(e, tokenFiveRef) }}
-                inputRef={tokenFourRef}
-                helperText={touched.tokenFour !== undefined ? errors.tokenFour : ''}
-                error={Boolean(touched.tokenFour !== undefined ? errors.tokenFour : '')}
-              />
-              <CustomTextFieldToken
-                fullWidth
-                name='tokenFive'
-                label=''
-                variant='outlined'
-                value={values.tokenFive}
-                onChange={handleChange}
-                onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => { handleKeyDown(e, tokenSixRef) }}
-                inputRef={tokenFiveRef}
-                helperText={touched.tokenFive !== undefined ? errors.tokenFive : ''}
-                error={Boolean(touched.tokenFive !== undefined ? errors.tokenFive : '')}
-              />
-              <CustomTextFieldToken
-                fullWidth
-                name='tokenSix'
-                label=''
-                variant='outlined'
-                value={values.tokenSix}
-                onChange={handleChange}
-                onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => { handleKeyDown(e, tokenSixRef) }}
-                inputRef={tokenSixRef}
-                helperText={touched.tokenSix !== undefined ? errors.tokenSix : ''}
-                error={Boolean(touched.tokenSix !== undefined ? errors.tokenSix : '')}
+              <FormEmail
+                values={values}
+                handleChange={handleChange}
+                touched={touched}
+                errors={errors}
+                handleKeyDown={handleKeyDown}
+                tokenOneRef={tokenOneRef}
+                tokenTwoRef={tokenTwoRef}
+                tokenThreeRef={tokenThreeRef}
+                tokenFourRef={tokenFourRef}
+                tokenFiveRef={tokenFiveRef}
+                tokenSixRef={tokenSixRef}
               />
             </Box>
             <CustonButton

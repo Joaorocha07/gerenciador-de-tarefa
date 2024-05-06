@@ -1,6 +1,11 @@
+/* eslint-disable max-len */
 import React from 'react'
 
-import { Typography, useMediaQuery, useTheme } from '@mui/material'
+import {
+  Typography,
+  useMediaQuery,
+  useTheme
+} from '@mui/material'
 
 interface ICustomTypographyProps {
   text: string
@@ -9,7 +14,10 @@ interface ICustomTypographyProps {
   'body1' | 'body2' | 'caption' | 'button' | 'overline' | 'inherit'
 }
 
-function CustomTypography ({ text, variant }: ICustomTypographyProps): JSX.Element {
+function CustomTypography ({
+  text,
+  variant
+}: ICustomTypographyProps): JSX.Element {
   const theme = useTheme()
   const tablet = useMediaQuery(theme.breakpoints.down('md'))
 

@@ -11,7 +11,10 @@ interface IconTextPasswordProps {
   text: string
 }
 
-export default function IconTextPassword ({ validations, text }: IconTextPasswordProps): JSX.Element {
+export default function IconTextPassword ({
+  validations,
+  text
+}: IconTextPasswordProps): JSX.Element {
   const theme = useTheme()
 
   return (

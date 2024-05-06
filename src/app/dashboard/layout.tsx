@@ -7,7 +7,9 @@ import { DrawerProvider } from '@/contexts/Drawer/DrawerContext'
 import CustomHead from '@/components/custom-head'
 import MenuSide from '@/components/menu-side/menu-side'
 
-export default function LoginLayout ({ children }: IChildrenProp): JSX.Element {
+export default function LoginLayout ({
+  children
+}: IChildrenProp): JSX.Element {
   return (
     <>
       <CustomHead title="Dashboard" />

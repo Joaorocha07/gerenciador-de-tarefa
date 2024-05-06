@@ -1,6 +1,10 @@
 import React from 'react'
 
-import { Button, type ButtonProps, useTheme } from '@mui/material'
+import {
+  Button,
+  type ButtonProps,
+  useTheme
+} from '@mui/material'
 
 interface ICustonButtonProps extends ButtonProps {
   loading?: boolean

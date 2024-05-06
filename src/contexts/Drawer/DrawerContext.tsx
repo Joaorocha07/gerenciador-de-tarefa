@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { createContext, useCallback, useContext, useState } from 'react'
 
 import { type IChildrenProp } from '@/types/global'

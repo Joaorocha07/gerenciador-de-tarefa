@@ -5,7 +5,9 @@ import { Box } from '@mui/material'
 
 import CustonButton from '@/components/button/custom-button'
 import CustomTypography from '@/components/text/CustomTypography'
-import CustomTextField from '@/components/textfield/custom-text-field'
+
+import CustomTextField
+  from '@/components/textfield/custom-text-field'
 
 export default function Login (): JSX.Element {
   const [email, setEmail] = useState('')
@@ -13,7 +15,10 @@ export default function Login (): JSX.Element {
   return (
     <>
       <Box textAlign="center">
-        <CustomTypography text="Acesse sua conta" variant="body1" />
+        <CustomTypography
+          text="Acesse sua conta"
+          variant="body1"
+        />
       </Box>
       <Box>
         <CustomTextField
@@ -28,7 +33,12 @@ export default function Login (): JSX.Element {
           name="email"
         />
       </Box>
-      <CustonButton fullWidth onClick={() => {}}>Próximo</CustonButton>
+      <CustonButton
+        fullWidth
+        onClick={() => {}}
+      >
+          Próximo
+      </CustonButton>
     </>
   )
 }

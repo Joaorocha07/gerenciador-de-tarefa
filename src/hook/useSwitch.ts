@@ -9,9 +9,12 @@ interface IUseSwitch {
 export const useSwitch = (): IUseSwitch => {
   const router = useRouter()
 
-  const [selectedButton, setSelectedButton] = useState<'login' | 'novaConta'>('novaConta')
+  const [selectedButton, setSelectedButton] =
+    useState<'login' | 'novaConta'>('novaConta')
 
-  const handleButtonClick = (buttonName: 'login' | 'novaConta'): void => {
+  const handleButtonClick = (
+    buttonName: 'login' | 'novaConta'
+  ): void => {
     router.push('/login')
     setSelectedButton(buttonName)
   }

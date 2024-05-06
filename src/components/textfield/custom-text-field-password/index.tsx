@@ -1,7 +1,13 @@
 import React, { useState } from 'react'
 
 import { Visibility, VisibilityOff } from '@mui/icons-material'
-import { IconButton, InputAdornment, TextField, useTheme } from '@mui/material'
+
+import {
+  IconButton,
+  InputAdornment,
+  TextField,
+  useTheme
+} from '@mui/material'
 
 interface CustomTextFieldPasswordProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
@@ -37,7 +43,8 @@ export default function CustomTextFieldPassword ({
   ...otherProps
 }: CustomTextFieldPasswordProps): JSX.Element {
   const theme = useTheme()
-  const [showPassword, setShowPassword] = useState<boolean>(false)
+  const [showPassword, setShowPassword] =
+    useState<boolean>(false)
 
   const handleClickShowPassword = (): void => {
     setShowPassword(showPassword => !showPassword)
@@ -92,9 +99,25 @@ export default function CustomTextFieldPassword ({
             >
               {showPassword
                 ? (
-                  <VisibilityOff sx={{ fontSize: { xl: '24px', md: '16px', color: theme.palette.primary.contrastText } }} />)
+                  <VisibilityOff
+                    sx={{
+                      fontSize: {
+                        xl: '24px',
+                        md: '16px',
+                        color: theme.palette.primary.contrastText
+                      }
+                    }}
+                  />)
                 : (
-                  <Visibility sx={{ fontSize: { xl: '24px', md: '16px', color: theme.palette.primary.contrastText } }} />)}
+                  <Visibility
+                    sx={{
+                      fontSize: {
+                        xl: '24px',
+                        md: '16px',
+                        color: theme.palette.primary.contrastText
+                      }
+                    }}
+                  />)}
             </IconButton>
           </InputAdornment>
         )

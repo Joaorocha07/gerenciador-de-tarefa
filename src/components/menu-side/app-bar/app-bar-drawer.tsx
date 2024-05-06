@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
-import { useDrawerContext } from '@/contexts/Drawer/DrawerContext'
+import { useDrawerContext }
+  from '@/contexts/Drawer/DrawerContext'
 
 import {
   AppBar,
@@ -18,8 +19,10 @@ import SettingsIcon from '@mui/icons-material/Settings'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import CustomTypography from '@/components/text/CustomTypography'
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
-import ButtonToggleTheme from '@/components/button/button-toggle-theme'
+import KeyboardArrowDownIcon
+  from '@mui/icons-material/KeyboardArrowDown'
+import ButtonToggleTheme
+  from '@/components/button/button-toggle-theme'
 
 export default function AppBarDrawer (): JSX.Element {
   const theme = useTheme()
@@ -28,9 +31,12 @@ export default function AppBarDrawer (): JSX.Element {
   const mobile = useMediaQuery(theme.breakpoints.down('sm'))
 
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+  const [anchorEl, setAnchorEl] =
+    useState<null | HTMLElement>(null)
 
-  const handleMenu = (event: React.MouseEvent<HTMLElement>): void => {
+  const handleMenu = (
+    event: React.MouseEvent<HTMLElement>
+  ): void => {
     setAnchorEl(event.currentTarget)
   }
 
@@ -45,7 +51,9 @@ export default function AppBarDrawer (): JSX.Element {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ backgroundColor: theme.palette.background.paper }}>
+      <AppBar
+        position="static"
+        sx={{ backgroundColor: theme.palette.background.paper }}>
         <Toolbar>
           {mobile && (
             <IconButton
@@ -56,14 +64,21 @@ export default function AppBarDrawer (): JSX.Element {
               sx={{ mr: 2 }}
               onClick={toggleMenu}
             >
-              {isMenuOpen ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+              {isMenuOpen
+                ? <ChevronLeftIcon />
+                : <ChevronRightIcon />}
             </IconButton>
           )}
           <Box sx={{ flexGrow: 1 }}>
             <ButtonToggleTheme />
           </Box>
-          <Box display="flex" alignItems="center" gap={theme.spacing(2)} >
-            <IconButton sx={{ color: theme.palette.primary.contrastText }}>
+          <Box
+            display="flex"
+            alignItems="center"
+            gap={theme.spacing(2)}
+          >
+            <IconButton
+              sx={{ color: theme.palette.primary.contrastText }}>
               <SettingsIcon />
             </IconButton>
             <Avatar
@@ -73,8 +88,14 @@ export default function AppBarDrawer (): JSX.Element {
               }}
               src='/static/images/avatar/1.jpg'
             />
-            <CustomTypography text='Nome do usuario' variant='body2' />
-            <IconButton onClick={handleMenu} sx={{ color: theme.palette.primary.contrastText }}>
+            <CustomTypography
+              text='Nome do usuario'
+              variant='body2'
+            />
+            <IconButton
+              onClick={handleMenu}
+              sx={{ color: theme.palette.primary.contrastText }}
+            >
               <KeyboardArrowDownIcon />
             </IconButton>
             <Menu
@@ -93,7 +114,8 @@ export default function AppBarDrawer (): JSX.Element {
               onClose={handleClose}
             >
               <MenuItem onClick={handleClose}>Profile</MenuItem>
-              <MenuItem onClick={handleClose}>My account</MenuItem>
+              <MenuItem
+                onClick={handleClose}>My account</MenuItem>
             </Menu>
           </Box>
         </Toolbar>

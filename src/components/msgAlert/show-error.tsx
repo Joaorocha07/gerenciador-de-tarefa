@@ -8,7 +8,7 @@ export const showError = (errorMessage: string): void => {
       htmlContainer: 'swal2-text-custom'
     },
     title: 'Erro!',
-    text: `Prezado aluno, ${errorMessage}`,
+    text: `${errorMessage}`,
     icon: 'error'
   })
 }

@@ -45,8 +45,6 @@ export default function CustomTextFieldToken ({
 }: CustomTextFieldTokenProps): JSX.Element {
   const theme = useTheme()
 
-  console.log(value)
-
   return (
     <TextField
       fullWidth={fullWidth}

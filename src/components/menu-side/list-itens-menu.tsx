@@ -11,7 +11,12 @@ import ListMenuSide from './components/list-menu-side'
 
 export const ListItensMenu = (): JSX.Element => {
   const theme = useTheme()
-  const { selectedItem, handleItemClick, menuItems, handleSubItemClick } = useMenu(items)
+  const {
+    selectedItem,
+    handleItemClick,
+    menuItems,
+    handleSubItemClick
+  } = useMenu(items)
 
   return (
     <>
@@ -31,16 +36,34 @@ export const ListItensMenu = (): JSX.Element => {
               {menuItem.subItems.length > 0 && (
                 <SubMenu
                   text={menuItem.text}
-                  selected={selectedItem === menuItem.text.toLowerCase().replace(/\s/g, '')}
-                  onClick={() => { handleItemClick(menuItem.text.toLowerCase().replace(/\s/g, '')) }}
+                  selected={
+                    selectedItem === menuItem.text.toLowerCase()
+                      .replace(/\s/g, '')
+                  }
+                  onClick={
+                    () => {
+                      handleItemClick(menuItem.text.toLowerCase()
+                        .replace(/\s/g, ''))
+                    }
+                  }
                 >
                   {menuItem.subItems.map((subItem, subIndex) => (
                     <ListMenuSide
                       key={subIndex}
                       text={subItem.text}
                       href={subItem.href}
-                      selected={selectedItem === subItem.text.toLowerCase().replace(/\s/g, '')}
-                      onClick={() => { handleSubItemClick(subItem.text.toLowerCase().replace(/\s/g, '')) }}
+                      selected={
+                        selectedItem === subItem.text
+                          .toLowerCase()
+                          .replace(/\s/g, '')
+                      }
+                      onClick={
+                        () => {
+                          handleSubItemClick(subItem.text
+                            .toLowerCase()
+                            .replace(/\s/g, ''))
+                        }
+                      }
                     >
                       {subItem.icon}
                     </ListMenuSide>

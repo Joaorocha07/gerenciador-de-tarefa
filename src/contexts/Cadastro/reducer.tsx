@@ -9,7 +9,9 @@ type ACTIONTYPE =
     payload: any
   }
 
-export const reducer = (state: IInitialState, action: ACTIONTYPE): any => {
+export const reducer = (
+  state: IInitialState, action: ACTIONTYPE
+): any => {
   switch (action.type) {
     case actions.SAVE_FORM_CADASTRO:
       return { ...state, formcadastro: action.payload }

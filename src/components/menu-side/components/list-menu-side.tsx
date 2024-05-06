@@ -1,5 +1,10 @@
 import React from 'react'
-import { ListItemButton, ListItemIcon, ListItemText, useTheme } from '@mui/material'
+import {
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  useTheme
+} from '@mui/material'
 import { useRouter } from 'next/navigation'
 
 interface ListMenuSideProps {
@@ -10,7 +15,13 @@ interface ListMenuSideProps {
   onClick: () => void
 }
 
-export default function ListMenuSide ({ children, text, href, selected, onClick }: ListMenuSideProps): JSX.Element {
+export default function ListMenuSide ({
+  children,
+  text,
+  href,
+  selected,
+  onClick
+}: ListMenuSideProps): JSX.Element {
   const theme = useTheme()
   const router = useRouter()
 
@@ -20,11 +31,23 @@ export default function ListMenuSide ({ children, text, href, selected, onClick 
   }
 
   return (
-    <ListItemButton onClick={handleClick} sx={{ bgcolor: selected ? theme.palette.primary.main : 'transparent' }} >
-      <ListItemIcon sx={{ color: theme.palette.primary.contrastText }}>
+    <ListItemButton
+      onClick={handleClick}
+      sx={{
+        bgcolor: selected
+          ? theme.palette.primary.main
+          : 'transparent'
+      }}
+    >
+      <ListItemIcon
+        sx={{ color: theme.palette.primary.contrastText }}
+      >
         {children}
       </ListItemIcon>
-      <ListItemText primary={text} sx={{ color: theme.palette.primary.contrastText }} />
+      <ListItemText
+        primary={text}
+        sx={{ color: theme.palette.primary.contrastText }}
+      />
     </ListItemButton>
   )
 }

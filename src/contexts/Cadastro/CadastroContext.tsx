@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { useReducer, createContext } from 'react'
 
 import { reducer } from './reducer'
