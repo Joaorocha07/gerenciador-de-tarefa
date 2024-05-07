@@ -2,7 +2,10 @@ import React, { useRef } from 'react'
 
 import { Form, Formik } from 'formik'
 import { Box, Button, Link, useTheme } from '@mui/material'
-import { useValidationEmail } from '@/hook/cadastro/useValidationEmail'
+
+import {
+  useValidationEmail
+} from '@/hook/cadastro/useValidationEmail'
 
 import FormEmail from './FormEmail'
 import CustonButton from '@/components/button/custom-button'
@@ -26,7 +29,12 @@ export default function ValidarEmail ({
   const tokenFiveRef = useRef(null)
   const tokenSixRef = useRef(null)
 
-  const { handleKeyDown, initialValues, validationSchema, handleSubmit } = useValidationEmail()
+  const {
+    handleKeyDown,
+    initialValues,
+    validationSchema,
+    handleSubmit
+  } = useValidationEmail()
 
   return (
     <>
@@ -34,7 +42,7 @@ export default function ValidarEmail ({
         style={{
           border: 'none',
           background: 'none',
-          color: 'inherit',
+          color: theme.palette.button.background,
           padding: 0,
           font: 'inherit',
           cursor: 'pointer',
@@ -42,13 +50,22 @@ export default function ValidarEmail ({
         }}>
         <Link>Voltar</Link>
       </Button>
-      <CustomTypography text='Enviamos um codigo para o seu e-mail, valide-o!' variant='body1' />
+      <CustomTypography
+        text='Enviamos um codigo para o seu e-mail, valide-o!'
+        variant='body1'
+      />
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        {({ values, errors, handleChange, handleSubmit, touched }) => (
+        {({
+          values,
+          errors,
+          handleChange,
+          handleSubmit,
+          touched
+        }) => (
           <Form
             onSubmit={handleSubmit}
             noValidate

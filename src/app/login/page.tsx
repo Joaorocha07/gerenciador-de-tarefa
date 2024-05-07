@@ -1,16 +1,24 @@
 'use client'
-import React, { useState } from 'react'
+import React from 'react'
 
-import { Box } from '@mui/material'
+import { Form, Formik } from 'formik'
+import { Box, useTheme } from '@mui/material'
+import { useFormLogin } from '@/hook/login/useFormLogin'
 
+import FormLogin from './components/FormLogin'
 import CustonButton from '@/components/button/custom-button'
 import CustomTypography from '@/components/text/CustomTypography'
 
-import CustomTextField
-  from '@/components/textfield/custom-text-field'
+export default function LoginPage (): JSX.Element {
+  const theme = useTheme()
 
-export default function Login (): JSX.Element {
-  const [email, setEmail] = useState('')
+  const {
+    initialValues,
+    validationSchema,
+    handleSubmit,
+    errorMessage,
+    error
+  } = useFormLogin()
 
   return (
     <>
@@ -20,25 +28,48 @@ export default function Login (): JSX.Element {
           variant="body1"
         />
       </Box>
-      <Box>
-        <CustomTextField
-          fullWidth
-          label="Seu e-mail"
-          variant="outlined"
-          type="email"
-          onChange={(e) => {
-            setEmail(e.target.value)
-          }}
-          value={email}
-          name="email"
-        />
-      </Box>
-      <CustonButton
-        fullWidth
-        onClick={() => {}}
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
       >
-          Próximo
-      </CustonButton>
+        {({
+          values,
+          errors,
+          handleChange,
+          handleSubmit,
+          touched
+        }) => (
+          <Form
+            onSubmit={handleSubmit}
+            noValidate
+            autoComplete="off"
+          >
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: theme.spacing(2)
+              }}
+            >
+              <FormLogin
+                error={error}
+                errorMessage={errorMessage}
+                errors={errors}
+                handleChange={handleChange}
+                touched={touched}
+                values={values}
+              />
+              <CustonButton
+                fullWidth
+                type='submit'
+              >
+                Logar
+              </CustonButton>
+            </Box>
+          </Form>
+        )}
+      </Formik>
     </>
   )
 }
